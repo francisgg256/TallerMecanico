@@ -28,6 +28,12 @@ public enum Opcion {
     private String mensaje;
     private static Map<Integer, Opcion> opciones = new TreeMap<>();
 
+    static {
+        for (Opcion opcion : values()) {
+            opciones.put(opcion.numeroOpcion, opcion);
+        }
+    }
+
     private Opcion(int numeroOpcion, String mensaje) {
         this.numeroOpcion = numeroOpcion;
         this.mensaje = mensaje;
