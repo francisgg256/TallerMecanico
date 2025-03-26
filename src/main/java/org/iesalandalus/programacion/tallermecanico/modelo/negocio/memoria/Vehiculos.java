@@ -1,13 +1,14 @@
-package org.iesalandalus.programacion.tallermecanico.modelo.negocio;
+package org.iesalandalus.programacion.tallermecanico.modelo.negocio.memoria;
 
 import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
+import org.iesalandalus.programacion.tallermecanico.modelo.negocio.IVehiculos;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Vehiculos {
+public class Vehiculos implements IVehiculos {
     Vehiculo coleccionVehiculos;
 
     List<Vehiculo>vehiculos;
@@ -16,12 +17,14 @@ public class Vehiculos {
         vehiculos = new ArrayList<>();
     }
 
+    @Override
     public List<Vehiculo> get() {
         List<Vehiculo> nuevoVehiculo;
         nuevoVehiculo = vehiculos;
         return nuevoVehiculo;
     }
 
+    @Override
     public void insertar(Vehiculo vehiculo) throws TallerMecanicoExcepcion{
         Objects.requireNonNull(vehiculo, "No se puede insertar un vehículo nulo.");
         if (!vehiculos.contains(vehiculo)) {
@@ -31,6 +34,7 @@ public class Vehiculos {
         }
     }
 
+    @Override
     public Vehiculo buscar(Vehiculo vehiculo) {
         Objects.requireNonNull(vehiculo, "No se puede buscar un vehículo nulo.");
         if (vehiculos.contains(vehiculo)) {
@@ -41,6 +45,7 @@ public class Vehiculos {
         }
     }
 
+    @Override
     public void borrar(Vehiculo vehiculo) throws TallerMecanicoExcepcion {
         Objects.requireNonNull(vehiculo,"No se puede borrar un vehículo nulo.");
         if (vehiculos.contains(vehiculo)) {
