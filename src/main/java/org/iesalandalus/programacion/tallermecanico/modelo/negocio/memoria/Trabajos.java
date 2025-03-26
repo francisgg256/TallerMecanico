@@ -127,7 +127,7 @@ public class Trabajos implements ITrabajos {
         if (trabajo1 instanceof Mecanico mecanico) {
             mecanico.anadirPrecioMaterial(precioMaterial);
         }
-        return trabajo;
+        return trabajo1;
     }
 
     @Override
