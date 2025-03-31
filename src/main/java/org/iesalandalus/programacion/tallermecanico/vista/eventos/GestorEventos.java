@@ -14,21 +14,27 @@ public class GestorEventos {
 
     public void suscribir(ReceptorEventos receptor, Evento ... eventos) {
         Objects.requireNonNull(eventos, "Los eventos no pueden ser nulos.");
+        Objects.requireNonNull(receptor, "El receptor no puede ser nulo.");
         for (Evento evento : eventos) {
-            receptores.get(evento).add(receptor);
+            List<ReceptorEventos> usuarios = receptores.get(evento);
+            usuarios.add(receptor);
         }
     }
 
     public void desuscribir(ReceptorEventos receptor, Evento ... eventos) {
         Objects.requireNonNull(eventos, "Los eventos no pueden ser nulos.");
+        Objects.requireNonNull(receptor, "El receptor no puede ser nulo.");
         for (Evento evento : eventos) {
-            receptores.get(evento).remove(receptor);
+            List<ReceptorEventos> usuarios = receptores.get(evento);
+            usuarios.remove(receptor);
         }
     }
 
     public void notificar(Evento evento) {
-        for (ReceptorEventos receptorEventos : ) {
-
+        Objects.requireNonNull(evento, "Los eventos no pueden ser nulos.");
+        List<ReceptorEventos> usuarios = receptores.get(evento);
+        for (ReceptorEventos receptor : usuarios) {
+            receptor.actualizar(evento);
         }
     }
 }
