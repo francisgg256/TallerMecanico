@@ -25,7 +25,7 @@ public class Consola {
     static void mostrarMenu() {
         Consola.mostrarCabecera("Gestión de un taller mecánico.");
         for (Evento evento : Evento.values()) {
-            System.out.println("%d,- %s%n", evento.getCodigo(), evento);
+            System.out.println(evento);
         }
     }
 

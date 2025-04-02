@@ -21,7 +21,7 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public void comenzar() {
+    public void comenzar() throws TallerMecanicoExcepcion {
         modelo.comenzar();
         vista.comenzar();
     }
@@ -54,7 +54,9 @@ public class Controlador implements IControlador {
                 case LISTAR_CLIENTES -> vista.mostrarClientes(modelo.getClientes());
                 case LISTAR_VEHICULOS -> vista.mostrarVehiculos(modelo.getVehiculos());
                 case LISTAR_TRABAJOS -> vista.mostrarTrabajos(modelo.getTrabajos());
-                case LISTAR_TRABAJOS_CLIENTE -> vista.mostrarTrabajosCliente(modelo.getTrabajos(vista.leerClienteDni()));
+                case LISTAR_TRABAJOS_CLIENTE -> vista.mostrarTrabajos(modelo.getTrabajos(vista.leerClienteDni()));
+                case LISTAR_TRABAJOS_VEHICULO -> vista.mostrarTrabajos(modelo.getTrabajos(vista.leerVehiculoMatricula()));
+                case SALIR -> terminar();
             }
         } catch (Exception e) {
             vista.notificarResultado(evento, e.getMessage(), false);

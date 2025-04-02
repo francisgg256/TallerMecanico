@@ -1,6 +1,7 @@
 package org.iesalandalus.programacion.tallermecanico.vista.texto;
 
 import org.iesalandalus.programacion.tallermecanico.controlador.Controlador;
+import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.*;
 import org.iesalandalus.programacion.tallermecanico.vista.eventos.Evento;
 import org.iesalandalus.programacion.tallermecanico.vista.eventos.GestorEventos;
@@ -12,11 +13,14 @@ import java.util.Objects;
 public class VistaTexto {
     private GestorEventos gestorEventos;
 
+    public VistaTexto() {
+        this.gestorEventos = new GestorEventos(Evento.values());
+    }
     public GestorEventos getGestorEventos() {
         return gestorEventos;
     }
 
-    public void comenzar() {
+    public void comenzar() throws TallerMecanicoExcepcion {
         Evento evento;
         do {
             Consola.mostrarMenu();
