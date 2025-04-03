@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8b0e04e-6981-41d9-b2bd-c9ae382a0816" name="Changes" comment="Commit inicial con el enunciado, las dependencias y los tests.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/iesalandalus/programacion/tallermecanico/controlador/Controlador.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/iesalandalus/programacion/tallermecanico/vista/Consola.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/org/iesalandalus/programacion/tallermecanico/vista/Vista.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/iesalandalus/programacion/tallermecanico/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/iesalandalus/programacion/tallermecanico/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/iesalandalus/programacion/tallermecanico/controlador/Controlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/iesalandalus/programacion/tallermecanico/controlador/Controlador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/iesalandalus/programacion/tallermecanico/vista/texto/VistaTexto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/iesalandalus/programacion/tallermecanico/vista/texto/VistaTexto.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,8 +53,9 @@
         <option value="JUnit5 Test Class" />
         <option value="Exception" />
         <option value="Record" />
-        <option value="Enum" />
         <option value="Class" />
+        <option value="Enum" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -95,13 +95,17 @@
   &quot;keyToString&quot;: {
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.Build TallerMecanico.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.TallerMecanico.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.Tests in 'org.iesalandalus.programacion.tallermecanico.modelo'.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.ClienteTest.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.ClientesTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MecanicoTest.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.ModeloTest.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.RevisionTest.constructorClienteNuloTurismoValidoFechaInicioValidaLanzaExcepcion.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.RevisionTest.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.RevisionesTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TrabajoTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TrabajosTest.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.VehiculoTest.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.VehiculosTest.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.org.iesalandalus.programacion.tallermecanico.modelo in TallerMecanicoResuelto.test.executor&quot;: &quot;Run&quot;,
@@ -121,9 +125,9 @@
     &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;sprint__inicial&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;refactorizacion__herencia&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/diurno/IdeaProjects/TallerMecanico/src/test/java/org/iesalandalus/programacion/tallermecanico/modelo/dominio/RevisionTest.java&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/diurno/IdeaProjects/TallerMecanico/src/test/java/org/iesalandalus/programacion/tallermecanico/modelo/dominio/TrabajoTest.java&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
@@ -137,6 +141,13 @@
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
+    </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="org.iesalandalus.programacion.tallermecanico.vista.texto" />
+      <recent name="org.iesalandalus.programacion.tallermecanico.controlador" />
+      <recent name="org.iesalandalus.programacion.tallermecanico.modelo.cascada" />
+      <recent name="org.iesalandalus.programacion.tallermecanico.modelo.negocio.memoria" />
+      <recent name="org.iesalandalus.programacion.tallermecanico.modelo.dominio" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="org.iesalandalus.programacion.tallermecanico.modelo" />
@@ -237,8 +248,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.RevisionTest.constructorClienteNuloTurismoValidoFechaInicioValidaLanzaExcepcion" />
         <item itemvalue="Gradle.Tests in 'org.iesalandalus.programacion.tallermecanico.modelo'" />
+        <item itemvalue="JUnit.RevisionTest.constructorClienteNuloTurismoValidoFechaInicioValidaLanzaExcepcion" />
         <item itemvalue="JUnit.org.iesalandalus.programacion.tallermecanico.modelo in TallerMecanicoResuelto.test" />
         <item itemvalue="JUnit.org.iesalandalus.programacion.tallermecanico.modelo in TallerMecanico.test" />
         <item itemvalue="JUnit.RevisionTest" />
@@ -358,7 +369,79 @@
       <option name="project" value="LOCAL" />
       <updated>1741770001722</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Commit inicial con el enunciado, las dependencias y los tests.">
+      <option name="closed" value="true" />
+      <created>1742805294267</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1742805294267</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Commit inicial con el enunciado, las dependencias y los tests.">
+      <option name="closed" value="true" />
+      <created>1742978289019</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1742978289019</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Commit inicial con el enunciado, las dependencias y los tests.">
+      <option name="closed" value="true" />
+      <created>1742978396243</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1742978396243</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Commit inicial con el enunciado, las dependencias y los tests.">
+      <option name="closed" value="true" />
+      <created>1742979108477</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1742979108479</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Commit inicial con el enunciado, las dependencias y los tests.">
+      <option name="closed" value="true" />
+      <created>1743081533055</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1743081533055</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Commit inicial con el enunciado, las dependencias y los tests.">
+      <option name="closed" value="true" />
+      <created>1743166186568</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1743166186568</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Commit inicial con el enunciado, las dependencias y los tests.">
+      <option name="closed" value="true" />
+      <created>1743166303972</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1743166303972</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Commit inicial con el enunciado, las dependencias y los tests.">
+      <option name="closed" value="true" />
+      <created>1743409707779</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1743409707779</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Commit inicial con el enunciado, las dependencias y los tests.">
+      <option name="closed" value="true" />
+      <created>1743582054853</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1743582054853</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
