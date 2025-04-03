@@ -33,8 +33,6 @@ public interface Vista {
 
     GestorEventos getGestorEventos();
 
-    void setControlador(Controlador controlador);
-
     void comenzar() throws TallerMecanicoExcepcion;
 
     void terminar();

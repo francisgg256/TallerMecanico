@@ -26,12 +26,6 @@ public class VistaTexto implements Vista {
     }
 
     @Override
-    public void setControlador(Controlador controlador){
-        Objects.requireNonNull(controlador);
-        this.controlador = controlador;
-    }
-
-    @Override
     public void comenzar() throws TallerMecanicoExcepcion {
         Evento evento;
         do {
