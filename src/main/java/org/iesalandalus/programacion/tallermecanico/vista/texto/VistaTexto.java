@@ -10,6 +10,7 @@ import org.iesalandalus.programacion.utilidades.Entrada;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class VistaTexto implements Vista {
@@ -63,6 +64,7 @@ public class VistaTexto implements Vista {
             case LISTAR_TRABAJOS_CLIENTE -> gestorEventos.notificar(Evento.LISTAR_TRABAJOS_CLIENTE);
             case LISTAR_TRABAJOS_VEHICULO -> gestorEventos.notificar(Evento.LISTAR_TRABAJOS_VEHICULO);
             case LISTAR_VEHICULOS -> gestorEventos.notificar(Evento.LISTAR_VEHICULOS);
+            case MOSTRAR_ESTADISTICAS_MENSUALES -> gestorEventos.notificar(Evento.MOSTRAR_ESTADISTICAS_MENSUALES);
             case SALIR -> gestorEventos.notificar(Evento.SALIR);
 
         }
@@ -204,5 +206,16 @@ public class VistaTexto implements Vista {
     public void mostrarVehiculo(Vehiculo vehiculo){
         Objects.requireNonNull(vehiculo,"El vehiculo no puede ser nulo.");
         System.out.println(vehiculo);
+    }
+
+    @Override
+    public LocalDate leerMes() {
+        return Consola.leerFecha("Introduzca el mes.");
+    }
+
+    @Override
+    public void mostrarEstadisticasMensuales(Map<TipoTrabajo, Integer> estadisticas) {
+        Objects.requireNonNull(estadisticas, "Las estadísticas no pueden ser nulas.");
+        System.out.println(estadisticas);
     }
 }

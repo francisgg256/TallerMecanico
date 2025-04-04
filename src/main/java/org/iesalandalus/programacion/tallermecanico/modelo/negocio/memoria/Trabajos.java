@@ -5,12 +5,24 @@ import org.iesalandalus.programacion.tallermecanico.modelo.dominio.*;
 import org.iesalandalus.programacion.tallermecanico.modelo.negocio.ITrabajos;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class Trabajos implements ITrabajos {
+//    private static final String FICHERO_TRABAJOS = ;
+//    private static final DateTimeFormatter FORMATO_FECHA = ;
+//    private static final String RAIZ = ;
+//    private static final String TRABAJO = ;
+//    private static final String CLIENTE = ;
+//    private static final String VEHICULO = ;
+//    private static final String FECHA_INICIO = ;
+//    private static final String FECHA_FIN = ;
+//    private static final String HORAS = ;
+//    private static final String PRECIO_MATERIAL = ;
+//    private static final String TIPO = ;
+//    private static final String REVISION = ;
+//    private static final String MECANICO = ;
+
     List<Trabajo> coleccionTrabajos;
 
     public Trabajos() {
@@ -159,5 +171,24 @@ public class Trabajos implements ITrabajos {
         } else {
             throw new TallerMecanicoExcepcion("No existe ningún trabajo igual.");
         }
+    }
+
+    @Override
+    public Map<TipoTrabajo, Integer> getEstadisticasMensuales(LocalDate mes) {
+        Map<TipoTrabajo, Integer> mapaEstadisticas;
+        mapaEstadisticas = inicializarEstadisticas();
+        for (Trabajo trabajo : coleccionTrabajos) {
+            if (trabajo.getFechaInicio().getMonth() == mes.getMonth() && trabajo.getFechaInicio().getYear() == mes.getYear()) {
+                mapaEstadisticas.put(TipoTrabajo.get(trabajo), mapaEstadisticas.get(TipoTrabajo.get(trabajo)) + 1);
+            }
+        }
+        return mapaEstadisticas;
+    }
+
+    private Map<TipoTrabajo, Integer> inicializarEstadisticas() {
+        Map<TipoTrabajo, Integer> mapaTipoTrabajos = new HashMap<>();
+        mapaTipoTrabajos.put(TipoTrabajo.MECANICO, 0);
+        mapaTipoTrabajos.put(TipoTrabajo.REVISION, 0);
+        return mapaTipoTrabajos;
     }
 }

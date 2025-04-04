@@ -9,6 +9,7 @@ import org.iesalandalus.programacion.tallermecanico.vista.texto.Consola;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 public interface Vista {
     Cliente leerCliente();
@@ -55,4 +56,7 @@ public interface Vista {
 
     void mostrarTrabajos(List<Trabajo> trabajos);
 
+    LocalDate leerMes();
+
+    void mostrarEstadisticasMensuales(Map<TipoTrabajo, Integer> estadisticas);
 }

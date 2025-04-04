@@ -6,12 +6,11 @@ import org.iesalandalus.programacion.tallermecanico.modelo.Modelo;
 import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
 import org.iesalandalus.programacion.tallermecanico.modelo.negocio.FabricaFuenteDatos;
 import org.iesalandalus.programacion.tallermecanico.vista.FabricaVista;
-import org.iesalandalus.programacion.tallermecanico.vista.texto.Consola;
 import org.iesalandalus.programacion.tallermecanico.vista.texto.VistaTexto;
 
 public class Main {
     public static void main(String[] args) {
-        Modelo modelo = FabricaModelo.CASCADA.crear(FabricaFuenteDatos.MEMORIA);
+        Modelo modelo = FabricaModelo.CASCADA.crear(FabricaFuenteDatos.FICHEROS);
         VistaTexto vista = FabricaVista.TEXTO.crear();
         Controlador controlador = new Controlador(modelo, vista);
         try {
