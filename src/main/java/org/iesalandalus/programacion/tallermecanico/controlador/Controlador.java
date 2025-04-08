@@ -59,6 +59,9 @@ public class Controlador implements IControlador {
                 case LISTAR_TRABAJOS_VEHICULO -> vista.mostrarTrabajos(modelo.getTrabajos(vista.leerVehiculoMatricula()));
                 case SALIR -> terminar();
             }
+            if (!resultado.isBlank()) {
+                vista.notificarResultado(evento, resultado, true);
+            }
         } catch (Exception e) {
             vista.notificarResultado(evento, e.getMessage(), false);
         }
