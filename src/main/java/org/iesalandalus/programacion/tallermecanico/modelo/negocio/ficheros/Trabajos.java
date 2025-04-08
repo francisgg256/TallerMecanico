@@ -1,11 +1,12 @@
-package org.iesalandalus.programacion.tallermecanico.modelo.negocio.memoria;
+package org.iesalandalus.programacion.tallermecanico.modelo.negocio.ficheros;
 
 import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.*;
 import org.iesalandalus.programacion.tallermecanico.modelo.negocio.ITrabajos;
 
+import javax.swing.text.Document;
+import javax.swing.text.Element;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Trabajos implements ITrabajos {
@@ -27,6 +28,20 @@ public class Trabajos implements ITrabajos {
 
     public Trabajos() {
         coleccionTrabajos = new ArrayList<>();
+    }
+
+//    Trabajos getInstancia() {
+//
+//    }
+
+    @Override
+    public void comenzar() {
+
+    }
+
+    @Override
+    public void terminar() {
+
     }
 
     @Override
@@ -191,4 +206,20 @@ public class Trabajos implements ITrabajos {
         mapaTipoTrabajos.put(TipoTrabajo.REVISION, 0);
         return mapaTipoTrabajos;
     }
+
+//    private void procesarDocumentoXml(Document documentoXml) {
+//
+//    }
+//
+//    private Vehiculo getTrabajo(Element elemento) {
+//
+//    }
+//
+//    private Document crearDocumentoXml() {
+//
+//    }
+//
+//    private Element getElemento(Document documentoXml, Trabajo trabajo) {
+//
+//    }
 }

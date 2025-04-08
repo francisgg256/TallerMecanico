@@ -8,7 +8,7 @@ public enum Evento {
     BUSCAR_CLIENTE(12, "Buscar cliente."),
     BORRAR_CLIENTE(13, "Borrar cliente."),
     LISTAR_CLIENTES(14, "Listar clientes."),
-    MODIFICAR_CLIENTE(15, "Mostrar cliente."),
+    MODIFICAR_CLIENTE(15, "Modificar cliente."),
     INSERTAR_VEHICULO(21, "Insertar vehículo."),
     BUSCAR_VEHICULO(22, "Buscar vehículo."),
     BORRAR_VEHICULO(23, "Borrar vehículo."),

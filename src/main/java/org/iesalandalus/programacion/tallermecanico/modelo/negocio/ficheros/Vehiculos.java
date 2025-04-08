@@ -1,20 +1,43 @@
-package org.iesalandalus.programacion.tallermecanico.modelo.negocio.memoria;
+package org.iesalandalus.programacion.tallermecanico.modelo.negocio.ficheros;
 
 import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.tallermecanico.modelo.negocio.IVehiculos;
 
+import javax.swing.text.Document;
+import javax.swing.text.Element;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Vehiculos implements IVehiculos {
+//    private static final String FICHERO_VEHICULOS =;
+//    private static final String RAIZ =;
+//    private static final String VEHICULO =;
+//    private static final String MARCA =;
+//    private static final String MODELO =;
+//    private static final String MATRICULA =;
+
     Vehiculo coleccionVehiculos;
 
     List<Vehiculo>vehiculos;
 
     public Vehiculos() {
         vehiculos = new ArrayList<>();
+    }
+
+//    Vehiculos getInstancia() {
+//
+//    }
+
+    @Override
+    public void comenzar() {
+
+    }
+
+    @Override
+    public void terminar() {
+
     }
 
     @Override
@@ -54,4 +77,20 @@ public class Vehiculos implements IVehiculos {
             throw new TallerMecanicoExcepcion("No existe ningún vehículo con esa matrícula.");
         }
     }
+
+//    private void procesarDocumentoXml(Document documentoXml) {
+//
+//    }
+//
+//    private Vehiculo getVehiculo(Element elemento) {
+//
+//    }
+//
+//    private Document crearDocumentoXml() {
+//
+//    }
+//
+//    private Element getElemento(Document documentoXml, Vehiculo vehiculo) {
+//
+//    }
 }

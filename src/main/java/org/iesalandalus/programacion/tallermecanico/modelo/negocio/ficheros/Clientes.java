@@ -1,17 +1,41 @@
-package org.iesalandalus.programacion.tallermecanico.modelo.negocio.memoria;
+package org.iesalandalus.programacion.tallermecanico.modelo.negocio.ficheros;
 
 import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Cliente;
+import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.tallermecanico.modelo.negocio.IClientes;
 
+import javax.swing.text.Document;
+import javax.swing.text.Element;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Clientes implements IClientes {
+//    private static final String FICHERO_CLIENTES =;
+//    private static final String RAIZ =;
+//    private static final String CLIENTE =;
+//    private static final String NOMBRE =;
+//    private static final String DNI =;
+//    private static final String TELEFONO =;
+
     List<Cliente> clientes;
     public Clientes(){
         clientes = new ArrayList<>();
+    }
+
+//    Clientes getInstancia() {
+//        if ()
+//    }
+
+    @Override
+    public void comenzar() {
+
+    }
+
+    @Override
+    public void terminar() {
+
     }
 
     @Override
@@ -68,4 +92,20 @@ public class Clientes implements IClientes {
             throw new TallerMecanicoExcepcion("No existe ningún cliente con ese DNI.");
         }
     }
+
+//    private void procesarDocumentoXml(Document documentoXml) {
+//
+//    }
+//
+//    private Vehiculo getCliente(Element elemento) {
+//
+//    }
+//
+//    private Document crearDocumentoXml() {
+//
+//    }
+//
+//    private Element getElemento(Document documentoXml, Cliente cliente) {
+//
+//    }
 }

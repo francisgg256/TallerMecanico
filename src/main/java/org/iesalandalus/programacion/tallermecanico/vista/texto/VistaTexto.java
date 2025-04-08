@@ -3,12 +3,14 @@ package org.iesalandalus.programacion.tallermecanico.vista.texto;
 import org.iesalandalus.programacion.tallermecanico.controlador.Controlador;
 import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.*;
+import org.iesalandalus.programacion.tallermecanico.modelo.negocio.ficheros.Clientes;
 import org.iesalandalus.programacion.tallermecanico.vista.Vista;
 import org.iesalandalus.programacion.tallermecanico.vista.eventos.Evento;
 import org.iesalandalus.programacion.tallermecanico.vista.eventos.GestorEventos;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -149,6 +151,7 @@ public class VistaTexto implements Vista {
     public void mostrarClientes(List<Cliente> clientes){
         Consola.mostrarCabecera("Listado de clientes");
         if (!clientes.isEmpty()){
+            clientes.sort(Comparator.comparing(Cliente::getNombre).thenComparing(Cliente::getDni));
             for (Cliente cliente : clientes){
                 System.out.println(cliente);
             }
@@ -167,6 +170,7 @@ public class VistaTexto implements Vista {
         Objects.requireNonNull(vehiculos,"La lista no puede ser nula.");
         Consola.mostrarCabecera("Listado de vehículos");
         if (!vehiculos.isEmpty()){
+            vehiculos.sort(Comparator.comparing(Vehiculo::marca).thenComparing(Vehiculo::modelo).thenComparing(Vehiculo::matricula));
             for (Vehiculo vehiculo : vehiculos){
                 System.out.println(vehiculo);
             }
@@ -178,9 +182,11 @@ public class VistaTexto implements Vista {
 
     @Override
     public void mostrarTrabajos(List<Trabajo> trabajos){
+        Comparator<Cliente> comparadorClientes = Comparator.comparing(Cliente::getNombre).thenComparing(Cliente::getDni);
         Objects.requireNonNull(trabajos,"La lista no pude ser nula.");
         Consola.mostrarCabecera("Listado de revisiones");
         if (!trabajos.isEmpty()){
+            trabajos.sort(Comparator.comparing(Trabajo::getFechaInicio).thenComparing(Trabajo::getCliente, comparadorClientes));
             for (Trabajo trabajo : trabajos){
                 System.out.println(trabajo);
             }
