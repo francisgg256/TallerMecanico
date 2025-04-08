@@ -41,11 +41,13 @@ public class ModeloCascada implements Modelo {
     @Override
     public void insertar(Cliente cliente) throws TallerMecanicoExcepcion {
         clientes.insertar(new Cliente(cliente));
+        System.out.println("Cliente insertado correctamente.");
     }
 
     @Override
     public void insertar(Vehiculo vehiculo) throws TallerMecanicoExcepcion {
         vehiculos.insertar(vehiculo);
+
     }
 
     @Override
