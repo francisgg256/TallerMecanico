@@ -6,37 +6,47 @@ import org.iesalandalus.programacion.tallermecanico.modelo.negocio.ITrabajos;
 
 import javax.swing.text.Document;
 import javax.swing.text.Element;
+import java.io.File;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Trabajos implements ITrabajos {
-//    private static final String FICHERO_TRABAJOS = ;
-//    private static final DateTimeFormatter FORMATO_FECHA = ;
-//    private static final String RAIZ = ;
-//    private static final String TRABAJO = ;
-//    private static final String CLIENTE = ;
-//    private static final String VEHICULO = ;
-//    private static final String FECHA_INICIO = ;
-//    private static final String FECHA_FIN = ;
-//    private static final String HORAS = ;
-//    private static final String PRECIO_MATERIAL = ;
-//    private static final String TIPO = ;
-//    private static final String REVISION = ;
-//    private static final String MECANICO = ;
+    private static final String FICHERO_TRABAJOS = String.format("%s%s%s", "datos", File.separator, "trabajos.xml");
+    private static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final String RAIZ = "trabajos";
+    private static final String TRABAJO = "trabajo";
+    private static final String CLIENTE = "cliente";
+    private static final String VEHICULO = "vehiculo";
+    private static final String FECHA_INICIO = "fechaInicio";
+    private static final String FECHA_FIN = "fechaFin";
+    private static final String HORAS = "horas";
+    private static final String PRECIO_MATERIAL = "precioMaterial";
+    private static final String TIPO = "tipo";
+    private static final String REVISION = "revision";
+    private static final String MECANICO = "mecanico";
 
-    List<Trabajo> coleccionTrabajos;
+    private final List<Trabajo> coleccionTrabajos;
+    private static Trabajos instancia;
 
     public Trabajos() {
         coleccionTrabajos = new ArrayList<>();
     }
 
-//    Trabajos getInstancia() {
-//
-//    }
+    static Trabajos getInstancia() {
+        if (instancia == null) {
+            instancia = new Trabajos();
+        }
+        return instancia;
+    }
 
     @Override
     public void comenzar() {
-
+        Document documentoXml = UtilidadesXml.leerDocumentoXml(FICHERO_TRABAJOS);
+        if (documentoXml != null) {
+            procesarDocumentoXml(documentoXml);
+            System.out.printf("Fichero %s leido correctamente.%n", FICHERO_TRABAJOS);
+        }
     }
 
     @Override
@@ -207,19 +217,19 @@ public class Trabajos implements ITrabajos {
         return mapaTipoTrabajos;
     }
 
-//    private void procesarDocumentoXml(Document documentoXml) {
-//
-//    }
-//
-//    private Vehiculo getTrabajo(Element elemento) {
-//
-//    }
-//
-//    private Document crearDocumentoXml() {
-//
-//    }
-//
-//    private Element getElemento(Document documentoXml, Trabajo trabajo) {
-//
-//    }
+    private void procesarDocumentoXml(Document documentoXml) {
+
+    }
+
+    private Vehiculo getTrabajo(Element elemento) {
+
+    }
+
+    private Document crearDocumentoXml() {
+
+    }
+
+    private Element getElemento(Document documentoXml, Trabajo trabajo) {
+
+    }
 }

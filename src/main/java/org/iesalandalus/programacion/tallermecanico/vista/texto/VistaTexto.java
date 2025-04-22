@@ -157,7 +157,7 @@ public class VistaTexto implements Vista {
             }
 
         }else {
-            System.out.println("La lista esta vacía.");
+            System.out.println("No hay clientes que mostrar.");
         }
     }
 
@@ -176,23 +176,23 @@ public class VistaTexto implements Vista {
             }
 
         }else {
-            System.out.println("La lista esta vacía.");
+            System.out.println("No hay vehículos que mostrar.");
         }
     }
 
     @Override
     public void mostrarTrabajos(List<Trabajo> trabajos){
-        Comparator<Cliente> comparadorClientes = Comparator.comparing(Cliente::getNombre).thenComparing(Cliente::getDni);
         Objects.requireNonNull(trabajos,"La lista no pude ser nula.");
         Consola.mostrarCabecera("Listado de revisiones");
         if (!trabajos.isEmpty()){
+            Comparator<Cliente> comparadorClientes = Comparator.comparing(Cliente::getNombre).thenComparing(Cliente::getDni);
             trabajos.sort(Comparator.comparing(Trabajo::getFechaInicio).thenComparing(Trabajo::getCliente, comparadorClientes));
             for (Trabajo trabajo : trabajos){
                 System.out.println(trabajo);
             }
 
         }else {
-            System.out.println("La lista esta vacía.");
+            System.out.println("No hay trabajos que mostrar.");
         }
     }
 
@@ -221,7 +221,6 @@ public class VistaTexto implements Vista {
 
     @Override
     public void mostrarEstadisticasMensuales(Map<TipoTrabajo, Integer> estadisticas) {
-        Objects.requireNonNull(estadisticas, "Las estadísticas no pueden ser nulas.");
-        System.out.println(estadisticas);
+        System.out.printf("Tipos de trabajos realizados este mes: %s%n", estadisticas);
     }
 }

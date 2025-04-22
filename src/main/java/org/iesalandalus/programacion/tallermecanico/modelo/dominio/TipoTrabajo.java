@@ -1,5 +1,7 @@
 package org.iesalandalus.programacion.tallermecanico.modelo.dominio;
 
+import java.util.Objects;
+
 public enum TipoTrabajo {
     MECANICO("Mecanico"),
     REVISION("Revision");
@@ -11,6 +13,7 @@ public enum TipoTrabajo {
     }
 
     public static TipoTrabajo get(Trabajo trabajo) {
+        Objects.requireNonNull(trabajo, "El trabajo no puede ser nulo.");
         TipoTrabajo tipoTrabajo = null;
         if (trabajo instanceof Revision) {
             tipoTrabajo = REVISION;
@@ -22,6 +25,6 @@ public enum TipoTrabajo {
 
     @Override
     public String toString() {
-        return String.format("[nombre=%s]", nombre);
+        return nombre;
     }
 }

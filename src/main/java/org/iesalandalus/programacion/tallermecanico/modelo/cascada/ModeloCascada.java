@@ -7,10 +7,7 @@ import org.iesalandalus.programacion.tallermecanico.modelo.dominio.*;
 import org.iesalandalus.programacion.tallermecanico.modelo.negocio.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 
 public class ModeloCascada implements Modelo {
@@ -41,13 +38,11 @@ public class ModeloCascada implements Modelo {
     @Override
     public void insertar(Cliente cliente) throws TallerMecanicoExcepcion {
         clientes.insertar(new Cliente(cliente));
-        System.out.println("Cliente insertado correctamente.");
     }
 
     @Override
     public void insertar(Vehiculo vehiculo) throws TallerMecanicoExcepcion {
         vehiculos.insertar(vehiculo);
-
     }
 
     @Override
@@ -179,6 +174,23 @@ public class ModeloCascada implements Modelo {
 
     @Override
     public Map<TipoTrabajo, Integer> getEstadisticasMensuales(LocalDate mes) {
+        Objects.requireNonNull(mes,"El mes no puede ser nulo.");
+        Map<TipoTrabajo, Integer> estadisticas = inicializarEstadisticas();
+        for (Trabajo trabajo : coleccionTrabajos) {
+            LocalDate fecha = trabajo.getFechaInicio();
+            if (fecha.getMonthValue() == mes.getMonthValue() && fecha.getYear() == mes.getYear()) {
+                TipoTrabajo tipoTrabajo = TipoTrabajo.get(trabajo);
+                estadisticas.put(tipoTrabajo, estadisticas.get(tipoTrabajo) + 1);
+            }
+        }
         return trabajos.getEstadisticasMensuales(mes);
+    }
+
+    private Map<TipoTrabajo, Integer> inicializarEstadisticas() {
+        Map<TipoTrabajo, Integer> estadisticas = new EnumMap<>(TipoTrabajo.class);
+        for (TipoTrabajo tipoTrabajo : TipoTrabajo.values()) {
+            estadisticas.put(tipoTrabajo, 0);
+        }
+        return estadisticas;
     }
 }
