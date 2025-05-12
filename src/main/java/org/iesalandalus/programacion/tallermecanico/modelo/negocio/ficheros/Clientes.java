@@ -2,53 +2,86 @@ package org.iesalandalus.programacion.tallermecanico.modelo.negocio.ficheros;
 
 import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Cliente;
-import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
-import org.iesalandalus.programacion.tallermecanico.modelo.negocio.IClientes;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import javax.swing.text.Document;
-import javax.swing.text.Element;
+
 import javax.xml.parsers.DocumentBuilder;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Clientes implements IClientes {
-    private static final String FICHERO_CLIENTES = String.format("%s%s%s" , "datos", File.separator, "clientes.xml");
+public class Clientes implements org.iesalandalus.programacion.tallermecanico.modelo.negocio.IClientes {
+    private static final String FICHERO_CLIENTES = String.format("%s%s%s", "datos" , File.separator, "clientes.xml");
     private static final String RAIZ = "clientes";
     private static final String CLIENTE = "cliente";
     private static final String NOMBRE = "nombre";
     private static final String DNI = "dni";
-    private static final String TELEFONO = "teléfono";
-    private Cliente coleccionClientes;
+    private static final String TELEFONO = "telefono";
+
+    Cliente coleccionClientes;
     private static Clientes instancia;
 
-    List<Cliente> clientes;
-    public Clientes(){
-        clientes = new ArrayList<>();
-    }
-
-    static Clientes getInstancia() {
-        if (instancia == null) {
+    static Clientes getInstancia(){
+        if (instancia == null){
             instancia = new Clientes();
         }
         return instancia;
     }
 
-    @Override
-    public void comenzar() {
-        Document documentoXml = UtilidadesXml.leerDocumentoXml(FICHERO_CLIENTES);
-        if (documentoXml != null) {
-            procesarDocumentoXml(documentoXml);
-            System.out.printf("Fichero %s leído correctamente. %n", FICHERO_CLIENTES);
+    private void procesarDocumentoXml(Document documentoXml) {
+
+        NodeList clientes = documentoXml.getElementsByTagName(CLIENTE);
+        for (int i = 0; i < clientes.getLength(); i++) {
+            Node cliente = clientes.item(i);
+            if (cliente.getNodeType() == Node.ELEMENT_NODE) {
+                try {
+                    insertar(getCliente((Element) cliente));
+                } catch (TallerMecanicoExcepcion | IllegalArgumentException | NullPointerException e) {
+                    System.out.printf("Error al procesar el cliente %s : %s", i, e.getMessage());
+                }
+            }
         }
     }
 
-    @Override
-    public void terminar() {
+    private Document crearDocumentoXml() {
+        DocumentBuilder contructorCliente = UtilidadesXml.crearConstructorDocumentoXml();
+        Document documentoXml = null;
+        if (contructorCliente != null){
+            documentoXml = contructorCliente.newDocument();
+            documentoXml.appendChild(documentoXml.createElement(RAIZ));
+            for (Cliente cliente : clientes){
+                Element elementoCliente = getElemento(documentoXml, cliente);
+                documentoXml.getDocumentElement().appendChild(elementoCliente);
+            }
+        }
+        return documentoXml;
 
+    }
+
+
+    private Element getElemento(Document documentoXml , Cliente cliente){
+        Element elementoCliente = documentoXml.createElement(CLIENTE);
+        elementoCliente.setAttribute(DNI,cliente.getDni());
+        elementoCliente.setAttribute(NOMBRE,cliente.getNombre());
+        elementoCliente.setAttribute(TELEFONO,cliente.getTelefono());
+        return elementoCliente;
+    }
+
+    private Cliente getCliente(Element elemento){
+        String nombre = (elemento).getAttribute(NOMBRE);
+        String dni = (elemento).getAttribute(DNI);
+        String telefono = (elemento).getAttribute(TELEFONO);
+        return new Cliente(nombre,dni,telefono);
+    }
+
+
+    List<Cliente> clientes;
+    private Clientes(){
+        clientes = new ArrayList<>();
     }
 
     @Override
@@ -59,7 +92,7 @@ public class Clientes implements IClientes {
     }
 
     @Override
-    public void insertar(Cliente cliente)throws TallerMecanicoExcepcion {
+    public void insertar(Cliente cliente)throws TallerMecanicoExcepcion{
         Objects.requireNonNull(cliente,"No se puede insertar un cliente nulo.");
         if (!clientes.contains(cliente)) {
             clientes.add(cliente);
@@ -69,9 +102,8 @@ public class Clientes implements IClientes {
     }
 
     @Override
-    public Cliente modificar(Cliente cliente, String nombre, String telefono)throws TallerMecanicoExcepcion{
+    public boolean modificar(Cliente cliente, String nombre, String telefono)throws TallerMecanicoExcepcion{
         Objects.requireNonNull(cliente, "No se puede modificar un cliente nulo.");
-
         if (clientes.contains(cliente)){
             if (nombre != null && !nombre.isBlank()){
                 buscar(cliente).setNombre(nombre);
@@ -79,7 +111,7 @@ public class Clientes implements IClientes {
             if (telefono != null && !telefono.isBlank()){
                 buscar(cliente).setTelefono(telefono);
             }
-            return buscar(cliente);
+            return true;
         } else {
             throw new TallerMecanicoExcepcion("No existe ningún cliente con ese DNI.");
         }
@@ -106,43 +138,20 @@ public class Clientes implements IClientes {
         }
     }
 
-    private void procesarDocumentoXml(Document documentoXml) {
-        NodeList clientes = documentoXml.getElementsByTagName(CLIENTE);
-        for (int i = 0; i < clientes.getLength(); i++) {
-            Node cliente = clientes.item(i);
-            try {
-                if (cliente.getNodeType() == Node.ELEMENT_NODE) {
-                    insertar(getCliente((Element) cliente));
-                }
-            } catch (TallerMecanicoExcepcion | IllegalArgumentException | NullPointerException e) {
-                System.out.printf("Error al leer el cliente %d. --> %s%n", i, e.getMessage());
-            }
+    @Override
+    public void comenzar() {
+        Document documentoXML = UtilidadesXml.leerDocumentoXml(FICHERO_CLIENTES);
+        if (documentoXML != null){
+            procesarDocumentoXml(documentoXML);
+            System.out.println("Fichero leído correctamente.");
         }
     }
 
-    private Vehiculo getCliente(Element elemento) {
+    @Override
+    public void terminar() {
+        Document documentXml = crearDocumentoXml();
+        UtilidadesXml.escribirDocumentoXml(documentXml,FICHERO_CLIENTES);
+        System.out.println("Fichero clientes escrito correctamente.");
 
-    }
-
-    private Document crearDocumentoXml() {
-        DocumentBuilder constructor = UtilidadesXml.crearConstructorDocumentoXml();
-        Document documentoXml = null;
-        if (constructor == null) {
-            documentoXml = constructor.newDocument();
-            documentoXml.appendChild(documentoXml.createElement(RAIZ));
-            for (Cliente cliente : coleccionClientes) {
-                Element elemento = getElemento(documentoXml, cliente);
-                documentoXml.getDocumentElement().appendChild(elemento);
-            }
-        }
-        return documentoXml;
-    }
-
-    private Element getElemento(Document documentoXml, Cliente cliente) {
-        Element elemento = documentoXml.createElement(CLIENTE);
-        elemento.setAttribute(NOMBRE, cliente.getNombre());
-        elemento.setAttribute(DNI, cliente.getDni());
-        elemento.setAttribute(TELEFONO, cliente.getTelefono());
-        return elemento;
     }
 }

@@ -11,10 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface ITrabajos {
-    void comenzar();
-
-    void terminar();
-
     List<Trabajo> get();
 
     List<Trabajo> get(Cliente cliente);
@@ -33,5 +29,10 @@ public interface ITrabajos {
 
     void borrar(Trabajo trabajo) throws TallerMecanicoExcepcion;
 
+
     Map<TipoTrabajo, Integer> getEstadisticasMensuales(LocalDate mes);
+
+    void comenzar();
+
+    void terminar() throws TallerMecanicoExcepcion;
 }

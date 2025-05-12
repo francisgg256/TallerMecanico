@@ -6,10 +6,6 @@ import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
 import java.util.List;
 
 public interface IVehiculos {
-    void comenzar();
-
-    void terminar();
-
     List<Vehiculo> get();
 
     void insertar(Vehiculo vehiculo) throws TallerMecanicoExcepcion;
@@ -17,4 +13,8 @@ public interface IVehiculos {
     Vehiculo buscar(Vehiculo vehiculo);
 
     void borrar(Vehiculo vehiculo) throws TallerMecanicoExcepcion;
+
+    void comenzar();
+
+    void terminar();
 }

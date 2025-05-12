@@ -1,9 +1,8 @@
 package org.iesalandalus.programacion.tallermecanico.vista.texto;
-
 import org.iesalandalus.programacion.tallermecanico.controlador.Controlador;
 import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.*;
-import org.iesalandalus.programacion.tallermecanico.modelo.negocio.ficheros.Clientes;
+
 import org.iesalandalus.programacion.tallermecanico.vista.Vista;
 import org.iesalandalus.programacion.tallermecanico.vista.eventos.Evento;
 import org.iesalandalus.programacion.tallermecanico.vista.eventos.GestorEventos;
@@ -28,6 +27,8 @@ public class VistaTexto implements Vista {
         return gestorEventos;
     }
 
+
+
     @Override
     public void comenzar() throws TallerMecanicoExcepcion {
         Evento evento;
@@ -36,7 +37,7 @@ public class VistaTexto implements Vista {
             evento = Consola.elegirOpcion();
             ejecutar(evento);
         } while (evento != Evento.SALIR);
-        controlador.terminar();
+
     }
 
     @Override
@@ -109,7 +110,7 @@ public class VistaTexto implements Vista {
 
     @Override
     public Vehiculo leerVehiculo(){
-        String marca = Consola.leerCadena("Introduzca el marca del vehiculo: ");
+        String marca = Consola.leerCadena("Introduzca el modelo del vehiculo: ");
         String modelo = Consola.leerCadena("Introduzca el modelo del vehiculo: ");
         String matricula = Consola.leerCadena("Introduzca la matricula del vehiculo: ");
         return new Vehiculo(marca,modelo,matricula);
@@ -150,14 +151,18 @@ public class VistaTexto implements Vista {
     @Override
     public void mostrarClientes(List<Cliente> clientes){
         Consola.mostrarCabecera("Listado de clientes");
+        clientes.sort(Comparator.comparing(
+                        Cliente::getNombre)
+                .thenComparing(Cliente :: getDni)
+
+        );
         if (!clientes.isEmpty()){
-            clientes.sort(Comparator.comparing(Cliente::getNombre).thenComparing(Cliente::getDni));
             for (Cliente cliente : clientes){
                 System.out.println(cliente);
             }
 
         }else {
-            System.out.println("No hay clientes que mostrar.");
+            System.out.println("La lista esta vacía.");
         }
     }
 
@@ -165,36 +170,53 @@ public class VistaTexto implements Vista {
         return Consola.leerFecha("Introduzca la fecha de cierre.");
     }
 
+    public LocalDate leerMes(){
+        return Consola.leerFecha("Introduzca el mes para la estadística.");
+    }
+
+    @Override
+    public void mostrarEstadisticas(Map<TipoTrabajo, Integer> estadistica) {
+        Objects.requireNonNull(estadistica,"Las estadísticas no pueden ser nulas.");
+        System.out.println(estadistica);
+    }
+
     @Override
     public void mostrarVehiculos(List<Vehiculo> vehiculos){
         Objects.requireNonNull(vehiculos,"La lista no puede ser nula.");
         Consola.mostrarCabecera("Listado de vehículos");
+        vehiculos.sort(Comparator.comparing(Vehiculo :: marca)
+                .thenComparing(Vehiculo :: modelo)
+                .thenComparing(Vehiculo::matricula));
         if (!vehiculos.isEmpty()){
-            vehiculos.sort(Comparator.comparing(Vehiculo::marca).thenComparing(Vehiculo::modelo).thenComparing(Vehiculo::matricula));
             for (Vehiculo vehiculo : vehiculos){
                 System.out.println(vehiculo);
             }
 
         }else {
-            System.out.println("No hay vehículos que mostrar.");
+            System.out.println("La lista esta vacía.");
         }
     }
 
     @Override
     public void mostrarTrabajos(List<Trabajo> trabajos){
         Objects.requireNonNull(trabajos,"La lista no pude ser nula.");
-        Consola.mostrarCabecera("Listado de revisiones");
+        org.iesalandalus.programacion.tallermecanico.vista.texto.Consola.mostrarCabecera("Listado de revisiones");
+        Comparator<Cliente> comparadorClientes = Comparator.comparing(Cliente :: getNombre).thenComparing(Cliente :: getDni);
+        trabajos.sort(Comparator.
+                comparing(Trabajo::getFechaInicio)
+                .thenComparing(Trabajo::getCliente,comparadorClientes)
+        );
         if (!trabajos.isEmpty()){
-            Comparator<Cliente> comparadorClientes = Comparator.comparing(Cliente::getNombre).thenComparing(Cliente::getDni);
-            trabajos.sort(Comparator.comparing(Trabajo::getFechaInicio).thenComparing(Trabajo::getCliente, comparadorClientes));
             for (Trabajo trabajo : trabajos){
                 System.out.println(trabajo);
             }
 
         }else {
-            System.out.println("No hay trabajos que mostrar.");
+            System.out.println("La lista esta vacía.");
         }
     }
+
+
 
     @Override
     public void mostrarCliente(Cliente cliente){
@@ -214,13 +236,5 @@ public class VistaTexto implements Vista {
         System.out.println(vehiculo);
     }
 
-    @Override
-    public LocalDate leerMes() {
-        return Consola.leerFecha("Introduzca el mes.");
-    }
 
-    @Override
-    public void mostrarEstadisticasMensuales(Map<TipoTrabajo, Integer> estadisticas) {
-        System.out.printf("Tipos de trabajos realizados este mes: %s%n", estadisticas);
-    }
 }
