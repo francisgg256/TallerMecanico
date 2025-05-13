@@ -29,7 +29,7 @@ public class Trabajos implements ITrabajos {
     private static final String HORAS = "horas";
     private static final String PRECIO_MATERIAL = "precioMaterial";
     private static final String TIPO = "tipo";
-    private static final String REVISiON = "revision";
+    private static final String REVISION = "revision";
     private static final String MECANICO = "mecanico";
     private static Trabajos instancia;
 
@@ -127,7 +127,7 @@ public class Trabajos implements ITrabajos {
         LocalDate fechaInicio = LocalDate.parse(elemento.getAttribute(FECHA_INICIO),FORMATO_FECHA);
         String tipo = elemento.getAttribute(TIPO);
         Trabajo trabajo = null;
-        if (tipo.equals(REVISiON)){
+        if (tipo.equals(REVISION)){
             trabajo = new Revision(cliente,vehiculo,fechaInicio);
         }else if (tipo.equals(MECANICO)){
             trabajo = new Mecanico(cliente,vehiculo,fechaInicio);
@@ -147,7 +147,7 @@ public class Trabajos implements ITrabajos {
         return trabajo;
     }
 
-    private Document crearDocumentoXml() throws TallerMecanicoExcepcion {
+    private Document crearDocumentoXml(){
         DocumentBuilder constructor = UtilidadesXml.crearConstructorDocumentoXml();
         Document documentoXml = null;
         if (constructor != null){
@@ -167,7 +167,7 @@ public class Trabajos implements ITrabajos {
         elementoTrabajo.setAttribute(VEHICULO,trabajo.getVehiculo().matricula());
         elementoTrabajo.setAttribute(FECHA_INICIO,trabajo.getFechaInicio().format(FORMATO_FECHA));
         if (trabajo instanceof Revision ){
-            elementoTrabajo.setAttribute(TIPO,REVISiON);
+            elementoTrabajo.setAttribute(TIPO, REVISION);
         }else if (trabajo instanceof Mecanico mecanico){
             elementoTrabajo.setAttribute(TIPO,MECANICO);
             if (mecanico.getPrecioMaterial() != 0){

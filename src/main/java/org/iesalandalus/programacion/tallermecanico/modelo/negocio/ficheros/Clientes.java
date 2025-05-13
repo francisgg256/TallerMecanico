@@ -2,6 +2,7 @@ package org.iesalandalus.programacion.tallermecanico.modelo.negocio.ficheros;
 
 import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Cliente;
+import org.iesalandalus.programacion.tallermecanico.modelo.negocio.IClientes;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Clientes implements org.iesalandalus.programacion.tallermecanico.modelo.negocio.IClientes {
+public class Clientes implements IClientes {
     private static final String FICHERO_CLIENTES = String.format("%s%s%s", "datos" , File.separator, "clientes.xml");
     private static final String RAIZ = "clientes";
     private static final String CLIENTE = "cliente";
@@ -104,14 +105,21 @@ public class Clientes implements org.iesalandalus.programacion.tallermecanico.mo
     @Override
     public boolean modificar(Cliente cliente, String nombre, String telefono)throws TallerMecanicoExcepcion{
         Objects.requireNonNull(cliente, "No se puede modificar un cliente nulo.");
+
         if (clientes.contains(cliente)){
+
+
+
             if (nombre != null && !nombre.isBlank()){
                 buscar(cliente).setNombre(nombre);
             }
+
             if (telefono != null && !telefono.isBlank()){
                 buscar(cliente).setTelefono(telefono);
             }
+
             return true;
+
         } else {
             throw new TallerMecanicoExcepcion("No existe ningún cliente con ese DNI.");
         }
@@ -154,4 +162,6 @@ public class Clientes implements org.iesalandalus.programacion.tallermecanico.mo
         System.out.println("Fichero clientes escrito correctamente.");
 
     }
+
+
 }

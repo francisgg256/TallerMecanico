@@ -1,5 +1,6 @@
 package org.iesalandalus.programacion.tallermecanico.vista.eventos;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -26,34 +27,33 @@ public enum Evento {
     MOSTRAR_ESTADISTICAS_MENSUALES(50, "Mostrar estadísticas mensuales."),
     SALIR(0, "Salir.");
 
-    private int codigo;
-    private String texto;
-    private static Map<Integer, Evento> eventos = new TreeMap<>();
+    private static final Map<Integer, Evento> opciones = new HashMap<>();
+    private String mensaje;
+    private int numeroOpcion;
+
+    private Evento(int numeroOpcion, String mensaje) {
+        this.mensaje = mensaje;
+        this.numeroOpcion = numeroOpcion;
+    }
 
     static {
-        for (Evento evento : values()) {
-            eventos.put(evento.codigo, evento);
+        for (Evento evento : values()){
+            opciones.put(evento.numeroOpcion, evento);
         }
     }
 
-    private Evento(int codigo, String texto) {
-        this.codigo = codigo;
-        this.texto = texto;
+    public static boolean esValido(int numeroOpcion){
+        return opciones.containsKey(numeroOpcion);
     }
 
-    public static boolean esValido(int codigo) {
-        return eventos.containsKey(codigo);
-    }
-
-    public static Evento get(int codigo) {
-        if(!esValido(codigo)) {
-            throw new IllegalArgumentException("El número de la opción no es correcto.");
-        }
-        return eventos.get(codigo);
+    public static Evento get(int numeroOpcion){
+        if (esValido(numeroOpcion)) {
+            return opciones.get(numeroOpcion);
+        } else throw new IllegalArgumentException("El número de opción no es valido.");
     }
 
     @Override
     public String toString() {
-        return String.format("%d, %s", codigo, texto);
+        return String.format("%s: %s",numeroOpcion, mensaje);
     }
 }

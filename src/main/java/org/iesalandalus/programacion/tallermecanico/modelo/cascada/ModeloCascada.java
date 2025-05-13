@@ -13,9 +13,9 @@ import java.util.Objects;
 
 public class ModeloCascada implements Modelo {
 
-    private IClientes clientes;
-    private IVehiculos vehiculos;
-    private ITrabajos trabajos;
+    private final IClientes clientes;
+    private final IVehiculos vehiculos;
+    private final ITrabajos trabajos;
 
 
 
@@ -65,6 +65,8 @@ public class ModeloCascada implements Modelo {
         } else if (trabajo instanceof Mecanico ){
             trabajo1 = new Mecanico(clientes.buscar(trabajo.getCliente()),vehiculos.buscar(trabajo.getVehiculo()),trabajo.getFechaInicio());
         }
+
+
         trabajos.insertar(trabajo1);
     }
 
