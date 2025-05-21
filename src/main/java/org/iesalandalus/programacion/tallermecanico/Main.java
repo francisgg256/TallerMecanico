@@ -12,4 +12,16 @@ public class Main {
         controlador.comenzar();
 
     }
+
+    private static FabricaVista procesarArgumentosVista(String[] args) {
+        FabricaVista fabricaVista = FabricaVista.VENTANA;
+        for (String argumento : args) {
+            if (argumento.equalsIgnoreCase("-vventana")) {
+                fabricaVista = FabricaVista.VENTANA;
+            } else if (argumento.equalsIgnoreCase("-vtexto")) {
+                fabricaVista = FabricaVista.TEXTO;
+            }
+        }
+        return fabricaVista;
+    }
 }

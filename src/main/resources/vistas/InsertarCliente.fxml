@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.tallermecanico.vista.ventanas.controladores.InsertarCliente">
    <children>
       <GridPane prefHeight="165.0" prefWidth="416.0">
         <columnConstraints>
@@ -24,11 +23,11 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Matrícula:" />
-            <TextField GridPane.columnIndex="1" />
-            <TextField prefHeight="25.0" prefWidth="246.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label text="Modelo:" GridPane.rowIndex="1" />
+            <Label text="Nombre:" />
+            <TextField fx:id="tfNombre" GridPane.columnIndex="1" />
+            <TextField fx:id="tfDni" prefHeight="25.0" prefWidth="246.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="tfTelefono" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="DNI:" GridPane.rowIndex="1" />
             <Label text="Teléfono:" GridPane.rowIndex="2" />
          </children>
          <VBox.margin>
@@ -37,8 +36,8 @@
       </GridPane>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
          <children>
-            <Button mnemonicParsing="false" text="Salir" />
-            <Button mnemonicParsing="false" text="Aceptar" />
+            <Button fx:id="btCancelar" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
+            <Button fx:id="btAceptar" mnemonicParsing="false" onAction="#aceptar" text="Aceptar" />
          </children>
          <VBox.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

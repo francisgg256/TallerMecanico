@@ -4,6 +4,7 @@ import org.iesalandalus.programacion.tallermecanico.modelo.dominio.*;
 import org.iesalandalus.programacion.tallermecanico.vista.Vista;
 import org.iesalandalus.programacion.tallermecanico.vista.eventos.Evento;
 import org.iesalandalus.programacion.tallermecanico.vista.eventos.GestorEventos;
+import org.iesalandalus.programacion.tallermecanico.vista.ventanas.utilidades.Dialogos;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -103,7 +104,9 @@ public class VistaGrafica implements Vista {
 
     @Override
     public void notificarResultado(Evento evento, String texto, boolean exito) {
-
+        if (exito) {
+            Dialogos.mostrarDialogoInformacion();
+        }
     }
 
     @Override
